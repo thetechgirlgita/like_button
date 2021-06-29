@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:like_button/like_button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,113 +7,288 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: drawer_Screen(),
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+// ignore: unused_element
+int _volume = 0;
+class drawer_Screen extends StatefulWidget {
+  const drawer_Screen({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _drawer_ScreenState createState() => _drawer_ScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+// ignore: camel_case_types
+class _drawer_ScreenState extends State<drawer_Screen> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width / 4,
+                child: Padding(
+                  padding: EdgeInsets.all(18),
+                  child: CircleAvatar(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              "https://pbs.twimg.com/profile_images/1270609275564392449/osuION5-_400x400.jpg",
+                            ),
+                          )),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: MediaQuery.of(context).size.width / 1.9,
+                color: Colors.white24,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 20, 0, 20),
+                  child: Container(
+                    color: Color(0xfff9edf9),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.search,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                            child: Text("Search"),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(83, 10, 10, 10),
+                            child: Icon(
+                              Icons.select_all_rounded,
+                            ),
+                          )
+                        ]),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50, 10, 10, 10),
+                child: Icon(
+                  Icons.message_rounded,
+                ),
+              )
+            ],
+          ), // header
+          SizedBox(
+            height: 1,
+            child: Container(
+              color: Colors.grey,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+
+          Padding(
+            // content side
+            padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+            child: Container(
+              color: Color(0xffffffff),
+              height: MediaQuery.of(context).size.height / 1.7,
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    height: MediaQuery.of(context).size.height / 12,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: CircleAvatar(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      "https://pbs.twimg.com/profile_images/1270609275564392449/osuION5-_400x400.jpg",
+                                    ),
+                                  )),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text("Gita Khanal"),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 200),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2.8,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: NetworkImage(
+                        "https://pbs.twimg.com/profile_images/1270609275564392449/osuION5-_400x400.jpg",
+                      ),
+                    )),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        height: MediaQuery.of(context).size.height/17,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 5),
+                              child:
+                            Icon(
+                              Icons.thumb_up,
+                              size: 15,
+                              color: Colors.grey,
+                            )
+                            ),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(5, 0, 0, 3),
+                                child:Text("$_volume",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                ),),
+
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(250, 0, 5, 3),
+                              child:Text("1",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                ),),
+
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 3),
+                              child:Text("comment",
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                ),),
+
+                            ),
+
+
+
+                          ],
+                        ),
+
+                      ),
+
+
+                    ],
+
+                  ),
+                  SizedBox(
+                      height: 1,
+                      child: Container(
+
+                        width : MediaQuery.of(context).size.width,
+                        color: Colors.grey,
+                      )
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        height: MediaQuery.of(context).size.height / 11.6,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            LikeButton(
+
+                              likeBuilder: (bool like){
+                                return Icon(
+                                  Icons.thumb_up,
+                                  color : like ? Colors.blue : Colors.grey,
+                                  size:30,
+                                );
+                              }
+
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.comment_bank),
+
+                              color: Colors.grey,
+                              onPressed: () {
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.send),
+
+                              color: Colors.grey,
+                              onPressed: () {
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.share),
+
+                              color: Colors.grey,
+                              onPressed: () {
+                                setState(() {
+
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 4,
+            child: Container(
+              color: Colors.grey,
+            ),
+          ),
+
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
+
+//Picture
+//https://pbs.twimg.com/profile_images/1270609275564392449/osuION5-_400x400.jpg
