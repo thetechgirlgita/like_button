@@ -1,3 +1,3 @@
 # like_button
 
-Tutorial code for creating a like button by
+Tutorial code for creating a like button by using
